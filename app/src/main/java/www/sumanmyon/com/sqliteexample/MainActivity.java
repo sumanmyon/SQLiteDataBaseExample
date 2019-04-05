@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean isTrue = checkingEditTextFieldsAreNotNull();
+                if(isTrue == true){
+                    boolean isInserted = myDB.insert(editTextName.getText().toString(),editTextSurName.getText().toString(),editTextMarks.getText().toString());
+                    if(isInserted == true){
+                        showMessage("Data Inserted Successfully");
+                    }else {
+                        showMessage("Data Inserted Successfully");
+                    }
+                }
             }
         });
     }
@@ -54,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         }else {
             return true;
         }
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(MainActivity.this,message,Toast.LENGTH_LONG).show();
     }
 
 }
