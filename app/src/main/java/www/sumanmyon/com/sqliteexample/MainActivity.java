@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         castingViews();
         addData();
         viewData();
+        updateData();
     }
 
     private void castingViews() {
@@ -43,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isTrue = checkingEditTextFieldsAreNotNull();
+                boolean isTrue = checkingEditTextFieldsAreNotNull("insert");
                 if(isTrue == true){
                     boolean isInserted = myDB.insert(editTextName.getText().toString(),editTextSurName.getText().toString(),editTextMarks.getText().toString());
                     if(isInserted == true){
                         showMessage("Data Inserted Successfully");
                     }else {
-                        showMessage("Data Inserted Successfully");
+                        showMessage("Data Inserted failed");
                     }
                 }
             }
@@ -87,6 +88,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void updateData(){
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isTrue = checkingEditTextFieldsAreNotNull("update");
+                if(isTrue == true){
+                    boolean isUpdated = myDB.update(editTextID.getText().toString(), editTextName.getText().toString(),
+                            editTextSurName.getText().toString(), editTextMarks.getText().toString());
+                    if(isUpdated == true){
+                        showMessage("Data Update Successfully");
+                    }else {
+                        showMessage("Data Update failed");
+                    }
+                }
+            }
+        });
+    }
+
     public void showAllData(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
@@ -95,19 +114,27 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private boolean checkingEditTextFieldsAreNotNull() {
-        if(TextUtils.isEmpty(editTextName.getText())){
-            editTextName.setError("Please enter name");
-            return false;
-        }else if(TextUtils.isEmpty(editTextSurName.getText())) {
-            editTextSurName.setError("Please enter surname");
-            return false;
-        }else if(TextUtils.isEmpty(editTextMarks.getText())) {
-            editTextMarks.setError("Please enter marks");
-            return false;
+    private boolean checkingEditTextFieldsAreNotNull(String type) {
+        if(type.equals("update")){
+            if(TextUtils.isEmpty(editTextID.getText())){
+                editTextID.setError("Please enter ID");
+                return false;
+            }
         }else {
-            return true;
+            if (TextUtils.isEmpty(editTextName.getText())) {
+                editTextName.setError("Please enter name");
+                return false;
+            } else if (TextUtils.isEmpty(editTextSurName.getText())) {
+                editTextSurName.setError("Please enter surname");
+                return false;
+            } else if (TextUtils.isEmpty(editTextMarks.getText())) {
+                editTextMarks.setError("Please enter marks");
+                return false;
+            } else {
+                return true;
+            }
         }
+        return true;
     }
 
     private void showMessage(String message) {
