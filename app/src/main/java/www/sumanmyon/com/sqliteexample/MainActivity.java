@@ -1,5 +1,6 @@
 package www.sumanmyon.com.sqliteexample;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         castingViews();
         addData();
+        viewData();
     }
 
     private void castingViews() {
@@ -47,6 +49,20 @@ public class MainActivity extends AppCompatActivity {
                         showMessage("Data Inserted Successfully");
                     }
                 }
+            }
+        });
+    }
+
+    private void viewData(){
+        buttonShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor cursor = myDB.getAllData();
+                if(cursor.getCount() == 0){  //TODO there is no data in database
+                    showMessage("There is no data in database");
+                    return;
+                }
+                
             }
         });
     }
