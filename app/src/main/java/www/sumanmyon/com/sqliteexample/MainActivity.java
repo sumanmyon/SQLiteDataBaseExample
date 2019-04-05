@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     DataBaseHelper myDB;
 
     EditText editTextName, editTextSurName, editTextMarks;
-    Button buttonInsert;
+    Button buttonInsert, buttonShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         editTextSurName = (EditText)findViewById(R.id.edit_text_surname);
         editTextMarks = (EditText)findViewById(R.id.edit_text_marks);
         buttonInsert = (Button) findViewById(R.id.button_insert);
+        buttonShow = (Button) findViewById(R.id.button_show);
     }
 
     private void addData() {
