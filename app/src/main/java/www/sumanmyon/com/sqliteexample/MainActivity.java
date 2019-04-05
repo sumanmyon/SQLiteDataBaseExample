@@ -1,6 +1,7 @@
 package www.sumanmyon.com.sqliteexample;
 
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Cursor cursor = myDB.getAllData();
                 if(cursor.getCount() == 0){  //TODO there is no data in database
-                    showMessage("There is no data in database");
+                    //showMessage("There is no data in database");
+                    showAllData("Error", "There is no data in database");
                     return;
                 }
 
@@ -74,10 +76,21 @@ public class MainActivity extends AppCompatActivity {
                     buffer.append("ID : "+cursor.getString(0)+"\n");
                     buffer.append("Name : "+cursor.getString(1)+"\n");
                     buffer.append("SurName : "+cursor.getString(2)+"\n");
-                    buffer.append("Marks : "+cursor.getString(3)+"\n");
+                    buffer.append("Marks : "+cursor.getString(3)+"\n\n");
                 }
+
+                //TODO Show all data
+                showAllData("Data",buffer.toString());
             }
         });
+    }
+
+    public void showAllData(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 
     private boolean checkingEditTextFieldsAreNotNull() {
