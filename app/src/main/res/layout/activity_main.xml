@@ -83,4 +83,12 @@
         android:id="@+id/button_insert"/>
 
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_margin="8dp"
+        android:text="Show"
+        android:id="@+id/button_show"/>
+
 </LinearLayout>
