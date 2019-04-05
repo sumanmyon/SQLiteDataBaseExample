@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     DataBaseHelper myDB;
 
-    EditText editTextName, editTextSurName, editTextMarks;
-    Button buttonInsert, buttonShow;
+    EditText editTextName, editTextSurName, editTextMarks, editTextID;
+    Button buttonInsert, buttonShow, buttonUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
         editTextName = (EditText)findViewById(R.id.edit_text_name);
         editTextSurName = (EditText)findViewById(R.id.edit_text_surname);
         editTextMarks = (EditText)findViewById(R.id.edit_text_marks);
+        editTextID = (EditText)findViewById(R.id.edit_text_id);
         buttonInsert = (Button) findViewById(R.id.button_insert);
         buttonShow = (Button) findViewById(R.id.button_show);
+        buttonUpdate = (Button)findViewById(R.id.button_update);
     }
 
     private void addData() {
