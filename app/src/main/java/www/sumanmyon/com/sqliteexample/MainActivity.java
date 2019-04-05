@@ -62,7 +62,20 @@ public class MainActivity extends AppCompatActivity {
                     showMessage("There is no data in database");
                     return;
                 }
-                
+
+                //TODO if cursor is at first of row or not
+                if(!cursor.isFirst()){
+                    cursor.moveToFirst();
+                }
+
+                //TODO store data in StringBuffer
+                StringBuffer buffer = new StringBuffer();
+                while (cursor.moveToNext()){
+                    buffer.append("ID : "+cursor.getString(0)+"\n");
+                    buffer.append("Name : "+cursor.getString(1)+"\n");
+                    buffer.append("SurName : "+cursor.getString(2)+"\n");
+                    buffer.append("Marks : "+cursor.getString(3)+"\n");
+                }
             }
         });
     }
