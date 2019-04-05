@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     DataBaseHelper myDB;
 
     EditText editTextName, editTextSurName, editTextMarks, editTextID;
-    Button buttonInsert, buttonShow, buttonUpdate;
+    Button buttonInsert, buttonShow, buttonUpdate, buttonDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         addData();
         viewData();
         updateData();
+        deleteData();
     }
 
     private void castingViews() {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         buttonInsert = (Button) findViewById(R.id.button_insert);
         buttonShow = (Button) findViewById(R.id.button_show);
         buttonUpdate = (Button)findViewById(R.id.button_update);
+        buttonDelete = (Button)findViewById(R.id.button_delete);
     }
 
     private void addData() {
@@ -106,6 +108,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteData(){
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isTrue = checkingEditTextFieldsAreNotNull("delete");
+                if(isTrue == true){
+                    Integer isDeleted = myDB.delete(editTextID.getText().toString());
+                    if(isDeleted > 0){
+                        showMessage("Data Deleted Successfully");
+                    }else {
+                        showMessage("Data Deleting failed");
+                    }
+                }
+            }
+        });
+    }
+
     public void showAllData(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
@@ -115,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkingEditTextFieldsAreNotNull(String type) {
-        if(type.equals("update")){
+        if(type.equals("update") || type.equals("delete")){
             if(TextUtils.isEmpty(editTextID.getText())){
                 editTextID.setError("Please enter ID");
                 return false;
