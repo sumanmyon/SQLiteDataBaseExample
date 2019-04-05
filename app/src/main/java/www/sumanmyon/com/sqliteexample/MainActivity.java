@@ -113,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean isTrue = checkingEditTextFieldsAreNotNull("delete");
+                if(isTrue == true){
+                    Integer isDeleted = myDB.delete(editTextID.getText().toString());
+                    if(isDeleted > 0){
+                        showMessage("Data Deleted Successfully");
+                    }else {
+                        showMessage("Data Deleting failed");
+                    }
+                }
             }
         });
     }
