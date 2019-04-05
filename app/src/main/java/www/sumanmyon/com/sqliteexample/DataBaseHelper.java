@@ -2,6 +2,7 @@ package www.sumanmyon.com.sqliteexample;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
@@ -47,5 +48,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    //TODO Show/Get data from database
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from "+TABLE_NAME, null);
+        return cursor;
     }
 }
